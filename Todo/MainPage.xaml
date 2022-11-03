@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Todo.MainPage"
+             xmlns:local="clr-namespace:Todo.CustomControls"
+             xmlns:vm="using:Todo.ViewModel"
+             x:DataType="vm:MainViewModel"
+             >
+
+    <Grid RowDefinitions="Auto, *"
+          ColumnDefinitions="5*, *"
+          Padding="10"
+          RowSpacing="10"
+          ColumnSpacing="10"
+          >
+
+
+        <Entry Placeholder="Enter task" Text="{Binding Text}"/>
+
+        <Button Grid.Column="1" Command="{Binding AddCommand}" Text="Add"/>
+
+        <CollectionView 
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            ItemsSource="{Binding Items}"
+            SelectionMode="None"
+            >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="{x:Type x:String}">
+                    <local:MySwipeView/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</ContentPage>
